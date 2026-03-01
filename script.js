@@ -49,13 +49,13 @@ const youtubeVideos = [
   "-_qbI5ClmMU"
 ];
 
-const instagramReels = [
-  "https://www.instagram.com/greyman_life/reel/DU_B9STk_Wg/",
-  "https://www.instagram.com/greyman_life/reel/DUddpUDE6Ps/",
-  "https://www.instagram.com/greyman_life/reel/DUdbz3yk1XC/",
-  "https://www.instagram.com/greyman_life/reel/DUOWYI4Ez0t/",
-  "https://www.instagram.com/greyman_life/reel/DTgFdq2E8ZV/",
-  "https://www.instagram.com/greyman_life/reel/DTbLF-9kwzG/"
+const instagramReelIds = [
+  "DU_B9STk_Wg",
+  "DUddpUDE6Ps",
+  "DUdbz3yk1XC",
+  "DUOWYI4Ez0t",
+  "DTgFdq2E8ZV",
+  "DTbLF-9kwzG"
 ];
 
 const blogPosts = [
@@ -74,22 +74,24 @@ function getRandomItem(arr) {
 function updatePublicContent() {
   const youtubeFrame = document.getElementById("youtubeFrame");
   const youtubeLink = document.getElementById("youtubeLink");
+  const instaFrame = document.getElementById("instaFrame");
   const instaLink = document.getElementById("instaLink");
-  const blogTitle = document.getElementById("blogTitle");
+  const blogFrame = document.getElementById("blogFrame");
   const blogLink = document.getElementById("blogLink");
 
-  if (!youtubeFrame || !youtubeLink || !instaLink || !blogTitle || !blogLink) return;
+  if (!youtubeFrame || !youtubeLink || !instaFrame || !instaLink || !blogFrame || !blogLink) return;
 
   const yt = getRandomItem(youtubeVideos);
   youtubeFrame.src = `https://www.youtube.com/embed/${yt}`;
   youtubeLink.href = `https://www.youtube.com/shorts/${yt}`;
 
-  const reel = getRandomItem(instagramReels);
-  instaLink.href = reel;
+  const reelId = getRandomItem(instagramReelIds);
+  instaFrame.src = `https://www.instagram.com/reel/${reelId}/embed`;
+  instaLink.href = `https://www.instagram.com/reel/${reelId}/`;
 
   const blog = getRandomItem(blogPosts);
-  blogTitle.innerText = blog.title;
+  blogFrame.src = blog.url;
   blogLink.href = blog.url;
 }
 
-updatePublicContent();
+document.addEventListener("DOMContentLoaded", updatePublicContent);
